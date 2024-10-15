@@ -1,6 +1,8 @@
 # DABS-MS
 A U-Net based solution for atlas-based segmentation using a Mumford-Shah functional inspired loss function.
 
+## Jupyter Notebook Example
+See Run-DABS-MS.ipynb for an example.
 
 ## Data Preprocessing and Structure
 ### Preprocessing
@@ -35,3 +37,9 @@ test_keyword2<br>
 test_keyword3<br>
 
 It also expects that there's an image directory, ground truth directory, and (optionally) a out-of-bounds directory, with files following a consistent structure. These structures can be defined in the img_template, gt_template, and oob_template sections of the parameter dictionary.
+
+## Learner Object
+The "learner" is an object which handles all of the network's training, testing, etc. The goal is to separate the "input" and "processing" as much as possible, for maximal versatility. Its main functions are as follows.
+- train(): train the model using the given parameter dictionary
+- export(): create and save the deformation fields for all the valid/test cases
+- evaluate(): create and save the deformed meshes for all the valid/test cases, as well as evaluate their accuracy using the Dice Score and 95th Percentile Hausdorff Distance metrics. The resulting values are saved.
