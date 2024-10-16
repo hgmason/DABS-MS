@@ -1,8 +1,6 @@
 import torch
 
-def loss_func(lrnr, small_combo_A, trans_pred, def_field): #all loss_funcs must have these inputs:
-    #print(small_combo_A.shape, trans_pred.shape)
-    #dfsdfsdfsd
+def loss_func(lrnr, small_combo_A, trans_pred, def_field): #all loss_funcs must have these inputs
     small_val = 1e-37
     target = trans_pred.flatten()
     atlas = small_combo_A[:,1,:,:,:].unsqueeze(1).flatten()
@@ -15,5 +13,4 @@ def loss_func(lrnr, small_combo_A, trans_pred, def_field): #all loss_funcs must 
     ret = torch.inner(F, T) #-1 when worst, 1 when best
     ret = -ret #-1 when best, 1 when worst
     ret = ret/2 + .5 #0 when best, 1 when worst
-    #ret = ret * 500 * 64**3 #to kinda make it more similar to mse i guess     
     return ret
