@@ -1,4 +1,6 @@
 # DABS-MS
+**Deep Atlas-Based Segmentation Using the Mumford-Shah Functional**
+
 A U-Net based solution for atlas-based segmentation using a Mumford-Shah functional inspired loss function.
 
 ## Jupyter Notebook Example
