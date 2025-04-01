@@ -315,14 +315,18 @@ class Learner():
             return temp
         return
     
-    def evaluate(self):
+    def evaluate(self, include_valid = True):
         dim = self.dim.cpu().numpy().astype(int).tolist()
         sz = self.sz.cpu().numpy().tolist()
-        #evaluate validation data
-        valid_defnames = [os.path.join(self.save_dir_def, keyword+"_def_field.im") for keyword in self.valid_keywords]
-        gt_names = [self.gt_template.replace("%s", keyword) for keyword in self.valid_keywords]
-        oob_names = [self.oob_template.replace("%s", keyword) for keyword in self.valid_keywords if len(self.oob_dir) > 0]
-        valid_95, _, valid_dice, valid_deformed_meshes = evaluator.evaluate_fnames(valid_defnames, dim, sz[0], gt_names, dim, sz[0], self.atlas_mesh_filename, self.atlas_mask_filename, sz[0], oob_names, return_meshes=True)
+        if include_valid:
+            #evaluate validation data
+            valid_defnames = [os.path.join(self.save_dir_def, keyword+"_def_field.im") for keyword in self.valid_keywords]
+            gt_names = [self.gt_template.replace("%s", keyword) for keyword in self.valid_keywords]
+            oob_names = [self.oob_template.replace("%s", keyword) for keyword in self.valid_keywords if len(self.oob_dir) > 0]
+            valid_95, _, valid_dice, valid_deformed_meshes = evaluator.evaluate_fnames(valid_defnames, dim, sz[0], gt_names, dim, sz[0], self.atlas_mesh_filename, self.atlas_mask_filename, sz[0], oob_names, return_meshes=True)
+        else:
+            valid_95 = None
+            valid_dice = None
         valid_results_dict = {}
         valid_results_dict["dist_95s"] = valid_95
         valid_results_dict["dice_scores"] = valid_dice
@@ -345,9 +349,10 @@ class Learner():
         for t in range(self.test_size):
             fname = os.path.join(self.save_mesh_dir, self.test_keywords[t] + "_result.mesh")
             parser.write_mesh_file(fname, test_deformed_meshes[t][0], test_deformed_meshes[t][1])
-        for t in range(self.valid_size):
-            fname = os.path.join(self.save_mesh_dir, self.valid_keywords[t] + "_result.mesh")
-            parser.write_mesh_file(fname, valid_deformed_meshes[t][0], valid_deformed_meshes[t][1])
+        if include_valid:
+            for t in range(self.valid_size):
+                fname = os.path.join(self.save_mesh_dir, self.valid_keywords[t] + "_result.mesh")
+                parser.write_mesh_file(fname, valid_deformed_meshes[t][0], valid_deformed_meshes[t][1])
         return
         
 
