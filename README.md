@@ -6,6 +6,22 @@ A U-Net based solution for atlas-based segmentation using a Mumford-Shah functio
 ## Jupyter Notebook Example
 See Run-DABS-MS.ipynb for an example.
 
+## Datasets
+### Internal Auditory Canal (IAC)
+- Patient consent was not obtained to permit publically sharing this dataset.
+
+### SegTHOR
+- SegTHOR: Segmentation of Thoracic Organs at Risk in CT images
+- Paper: https://arxiv.org/abs/1912.05950
+- Dataset: https://competitions.codalab.org/competitions/21145
+- *Data has been preprocessed for this task. The pre-processed version of this dataset will be made available upon request.*
+
+### Healthy KiTS21
+- The 2021 Kidney and Kidney Tumor Segmentation Challenges
+- Paper: https://arxiv.org/abs/2307.01984
+- Dataset: https://kits-challenge.org/kits21/
+- *Data has been preprocessed for this task. Not all images were used. Only kidneys without tumors were used. The pre-processed version of this dataset will be made available upon request.*
+
 ## Data Preprocessing and Structure
 ### Preprocessing
 DABS-MS expects that
