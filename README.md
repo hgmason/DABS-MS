@@ -8,7 +8,7 @@ See Run-DABS-MS.ipynb for an example.
 
 ## Datasets
 ### Internal Auditory Canal (IAC)
-- Patient consent was not obtained to permit publically sharing this dataset.
+- Patient consent was not obtained to permit publicly sharing this dataset.
 
 ### SegTHOR
 - SegTHOR: Segmentation of Thoracic Organs at Risk in CT images
